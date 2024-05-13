@@ -152,9 +152,9 @@ def DEF_CHANGE_MESSAGER_STATUS(CHATID):
         if RESPONCE.status_code == 200:
             INBOUNDS = json.loads(RESPONCE.text)
             FOUND = False
-            if "shadowsocks" in INBOUNDS :
-                for ITEM in INBOUNDS["shadowsocks"]:
-                    if "Holderbot" in ITEM["tag"]:
+            if "vmess" in INBOUNDS :
+                for ITEM in INBOUNDS["vmess"]:
+                    if "End" in ITEM["tag"]:
                         FOUND = True
                         break
             else :
@@ -165,7 +165,7 @@ def DEF_CHANGE_MESSAGER_STATUS(CHATID):
                 conn.close()
                 TEXT = "<b>✅ Your status is on.</b>"
             else :
-                TEXT = "<b>❌ Your status is not change.\nyou don't have Holderbot inbounds!</b>"
+                TEXT = "<b>❌ Your status is not change.\nyou don't have End inbounds!</b>"
         else :
             TEXT = "<b>❌ i can't check inbounds!</b>"
     return TEXT
