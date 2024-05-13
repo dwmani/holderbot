@@ -24,7 +24,7 @@ with app :
                         if not USER["inbounds"] == {'vmess': ['End']} :
                             USERNAME = USER["username"]
                             URL = f"https://{PANEL_DOMAIN}/api/user/{USERNAME}"
-                            DATA = {"proxies":{"vmess":{}},"inbounds" : {'vmess': ['End']}}
+                            DATA = {"proxies":{"vmess":{}, "vless":{}},"inbounds" : {'vmess': ['End'], 'vless': ['VLESS Websocket', 'DE-TUN', 'NE-TUN', 'EN-TUN', 'FR-TUN', 'TR-TUN']}}
                             RESPONCE = requests.put(url=URL , json=DATA , headers=PANEL_TOKEN)
                             if RESPONCE.status_code == 200 :
                                 app.send_message(chat_id=BOSS_CHATID , text=f"<b>✅ (Checker) Boss! user <code>{USERNAME}</code> is limited,\nI have set the messages.</b>" , parse_mode=enums.ParseMode.HTML , disable_notification=True)
