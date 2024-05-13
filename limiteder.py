@@ -21,7 +21,8 @@ with app :
                 if RESPONCE.status_code == 200 :
                     RESPONCE_DATA = RESPONCE.json()
                     for USER in RESPONCE_DATA["users"] :
-                        if not USER["inbounds"] == {'vmess': ['End']} :
+                        if USERNAME == 'manityesp' :
+                        if not USER["inbounds"] == {'vmess': ['End'], 'vless': ['VLESS Websocket', 'DE-TUN', 'NE-TUN', 'EN-TUN', 'FR-TUN', 'TR-TUN']} :
                             USERNAME = USER["username"]
                             URL = f"https://{PANEL_DOMAIN}/api/user/{USERNAME}"
                             DATA = {"proxies":{"vmess":{}, "vless":{}},"inbounds" : {'vmess': ['End'], 'vless': ['VLESS Websocket', 'DE-TUN', 'NE-TUN', 'EN-TUN', 'FR-TUN', 'TR-TUN']}}
