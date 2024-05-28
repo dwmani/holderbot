@@ -72,6 +72,11 @@ if ps aux | grep -v grep | grep "python3 limiteder.py" &> /dev/null; then
     pkill -f "python3 limiteder.py"
 fi
 
+if ps aux | grep -v grep | grep "python3 actived.py" &> /dev/null; then
+    echo "Stopping existing limiteder process..."
+    pkill -f "python3 actived.py"
+fi
+
 mkdir holderbot
 cd holderbot
 
@@ -132,10 +137,12 @@ chmod +x monitoring.py
 chmod +x holder.py
 chmod +x expired.py
 chmod +x limiteder.py
+chmod +x actived.py
 nohup python3 monitoring.py & disown
 nohup python3 holder.py & disown
 nohup python3 expired.py & disown
 nohup python3 limiteder.py & disown
+nohup python3 actived.py & disown
 chmod +x restart.sh
 cronjob="@reboot sleep 20 && /bin/bash /holderbot/restart.sh"
 if ! crontab -l | grep -Fq "$cronjob"; then
