@@ -24,7 +24,7 @@ with app :
                         if not USER["inbounds"] == {'vmess': ['End'], 'vless': ['DE-TUN', 'NE-TUN', 'EN-TUN', 'FR-TUN', 'PL-TUN', 'DE2-TUN', 'NE2-TUN', 'EN2-TUN', 'FR2-TUN', 'TR-TUN']} :
                             USERNAME = USER["username"]
                             URL = f"https://{PANEL_DOMAIN}/api/user/{USERNAME}"
-                            DATA = {"proxies":{"vmess":{}, "vless":{}},"inbounds" : {'vmess': ['End'], 'vless': ['DE-TUN', 'NE-TUN', 'EN-TUN', 'FR-TUN', 'PL-TUN', 'VLESS Websocket']}}
+                            DATA = {"proxies":{"vmess":{}, "vless":{}},"inbounds" : {'vmess': ['End'], 'vless': ['DE-TUN', 'NE-TUN', 'EN-TUN', 'FR-TUN', 'PL-TUN', 'DE2-TUN', 'NE2-TUN', 'EN2-TUN', 'FR2-TUN', 'TR-TUN']}}
                             RESPONCE = requests.put(url=URL , json=DATA , headers=PANEL_TOKEN)
                             if RESPONCE.status_code == 200 :
                                 app.send_message(chat_id=BOSS_CHATID , text=f"<b>🕔 (Checker) Boss! user <code>{USERNAME}</code> is expired,\nI have set the messages.</b>" , parse_mode=enums.ParseMode.HTML , disable_notification=True)
