@@ -21,10 +21,10 @@ with app :
                 if RESPONCE.status_code == 200 :
                     RESPONCE_DATA = RESPONCE.json()
                     for USER in RESPONCE_DATA["users"] :
-                        if not USER["inbounds"] == {'vmess': ['End'], 'vless': ['DE-TUN', 'FI-TUN', 'NL-TUN', 'FR-TUN', 'TR-TUN', 'DE2-TUN', 'FI2-TUN', 'NL2-TUN', 'FR2-TUN', 'US-TUN']} :
+                        if not USER["inbounds"] == {'vmess': ['End'], 'vless': ['DE-TUN', 'FI-TUN', 'NL-TUN', 'FR-TUN', 'TR-TUN', 'DE2-TUN', 'FI2-TUN', 'NL2-TUN', 'FR2-TUN', 'US-TUN', 'cloudflare']} :
                             USERNAME = USER["username"]
                             URL = f"https://{PANEL_DOMAIN}/api/user/{USERNAME}"
-                            DATA = {"proxies":{"vmess":{}, "vless":{}},"inbounds" : {'vmess': ['End'], 'vless': ['DE-TUN', 'FI-TUN', 'NL-TUN', 'FR-TUN', 'TR-TUN', 'DE2-TUN', 'FI2-TUN', 'NL2-TUN', 'FR2-TUN', 'US-TUN']}}
+                            DATA = {"proxies":{"vmess":{}, "vless":{}},"inbounds" : {'vmess': ['End'], 'vless': ['DE-TUN', 'FI-TUN', 'NL-TUN', 'FR-TUN', 'TR-TUN', 'DE2-TUN', 'FI2-TUN', 'NL2-TUN', 'FR2-TUN', 'US-TUN', 'cloudflare']}}
                             RESPONCE = requests.put(url=URL , json=DATA , headers=PANEL_TOKEN)
                             if RESPONCE.status_code == 200 :
                                 app.send_message(chat_id=BOSS_CHATID , text=f"<b>🪫 (Checker) Boss! user <code>{USERNAME}</code> is limited,\nI have set the messages.</b>" , parse_mode=enums.ParseMode.HTML , disable_notification=True)
@@ -38,3 +38,4 @@ with app :
             app.send_message(chat_id=BOSS_CHATID , text=f"<b>❌ (Checker) limiteder Error :</b>\n<pre>{str(e)}</pre>" , parse_mode=enums.ParseMode.HTML , disable_notification=True)
             time.sleep(60)
             pass
+
