@@ -21,10 +21,10 @@ with app :
                 if RESPONCE.status_code == 200 :
                     RESPONCE_DATA = RESPONCE.json()
                     for USER in RESPONCE_DATA["users"] :
-                        if not USER["inbounds"] == {'vmess': ['End'], 'vless': ['REALITY', 'CDN']} :
+                        if not USER["inbounds"] == {'vmess': ['End'], 'vless': ['REALITY', 'tcp']} :
                             USERNAME = USER["username"]
                             URL = f"https://{PANEL_DOMAIN}/api/user/{USERNAME}"
-                            DATA = {"proxies":{"vmess":{}, "vless":{}},"inbounds" : {'vmess': ['End'], 'vless': ['REALITY', 'CDN']}}
+                            DATA = {"proxies":{"vmess":{}, "vless":{}},"inbounds" : {'vmess': ['End'], 'vless': ['REALITY', 'tcp']}}
                             RESPONCE = requests.put(url=URL , json=DATA , headers=PANEL_TOKEN)
                             if RESPONCE.status_code == 200 :
                                 app.send_message(chat_id=BOSS_CHATID , text=f"<b>🕔 (Checker) Boss! user <code>{USERNAME}</code> is expired,\nI have set the messages.</b>" , parse_mode=enums.ParseMode.HTML , disable_notification=True)
@@ -38,6 +38,7 @@ with app :
             app.send_message(chat_id=BOSS_CHATID , text=f"<b>❌ (Checker) Expirider Error :</b>\n<pre>{str(e)}</pre>" , parse_mode=enums.ParseMode.HTML)
             time.sleep(60)
             pass
+
 
 
 
