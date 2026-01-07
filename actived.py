@@ -21,10 +21,10 @@ with app :
                 if RESPONCE.status_code == 200 :
                     RESPONCE_DATA = RESPONCE.json()
                     for USER in RESPONCE_DATA["users"] :
-                        if not USER["inbounds"] == {'vmess': ['VMESS Websocket'], 'vless': ['REALITY', 'tcp']} :
+                        if not USER["inbounds"] == {'vmess': ['VMESS Websocket'], 'vless': ['REALITY', 'tcp-meli']} :
                             USERNAME = USER["username"]
                             URL = f"https://{PANEL_DOMAIN}/api/user/{USERNAME}"
-                            DATA = {"proxies":{"vmess":{}, "vless":{}},"inbounds" : {'vmess': ['VMESS Websocket'], 'vless': ['REALITY', 'tcp']}}
+                            DATA = {"proxies":{"vmess":{}, "vless":{}},"inbounds" : {'vmess': ['VMESS Websocket'], 'vless': ['REALITY', 'tcp-meli']}}
                             RESPONCE = requests.put(url=URL , json=DATA , headers=PANEL_TOKEN)
                             if RESPONCE.status_code == 200 :
                                 app.send_message(chat_id=BOSS_CHATID , text=f"<b>✅ (Checker) Boss! user <code>{USERNAME}</code> is active,\nI have set the messages.</b>" , parse_mode=enums.ParseMode.HTML , disable_notification=True)
